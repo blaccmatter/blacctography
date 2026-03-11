@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Blacctography Portfolio — Flash photography, event coverage, and content creation across the DMV. Real moments, real energy."/>
+  <title>Portfolio — BLACCTOGRAPHY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* ── PORTFOLIO PAGE ─────────────────────────────────────────── */
+
+    .port-hero {
+      background: var(--ink);
+      padding: 100px var(--pad-x) 80px;
+      position: relative; overflow: hidden;
+    }
+    .port-hero::before {
+      content:''; position:absolute; inset:0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.015) 3px,rgba(255,255,255,.015) 4px);
+      pointer-events:none;
+    }
+    .port-hero-inner { max-width: var(--max-w); margin: 0 auto; position:relative; z-index:2; }
+    .port-hero .section-kicker { color: var(--amber); }
+    .port-hero .section-kicker::before { background: var(--amber); }
+    .port-hero .section-title { color: var(--paper); margin-bottom: 16px; }
+    .port-hero-sub { font-family: var(--font-serif); font-style: italic; font-size: 17px; color: rgba(245,240,232,.5); max-width: 500px; line-height: 1.7; }
+
+    /* Filter Bar */
+    .filter-bar {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--pad-x);
+      display: flex; align-items: stretch;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .filter-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 18px 24px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mid);
+      background: none; border: none; border-bottom: 3px solid transparent;
+      cursor: crosshair;
+      white-space: nowrap;
+      transition: color .15s, border-color .15s;
+    }
+    .filter-btn:hover { color: var(--ink); }
+    .filter-btn.active { color: var(--ink); border-bottom-color: var(--red); }
+    .filter-count { background: var(--border); padding: 2px 8px; font-size: 9px; border-radius: 20px; }
+    .filter-btn.active .filter-count { background: var(--red); color: white; }
+
+    /* Grid */
+    .port-section { padding: 60px var(--pad-x); }
+    .port-section-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    #portfolio-grid {
+      columns: 3;
+      column-gap: var(--gap);
+    }
+
+    .port-item {
+      break-inside: avoid;
+      margin-bottom: var(--gap);
+      position: relative;
+      overflow: hidden;
+      cursor: crosshair;
+      background: var(--ink);
+      transition: opacity .3s, transform .3s;
+    }
+    .port-item:hover .port-item-overlay { opacity: 1; }
+    .port-item:hover .port-item-img { transform: scale(1.04); }
+
+    .port-item-img {
+      width: 100%; display: block;
+      filter: contrast(1.05) saturate(0.92);
+      transition: transform .4s ease;
+      aspect-ratio: var(--ar, 1);
+      object-fit: cover;
+    }
+
+    /* Placeholder image blocks (swap with real <img> tags when you have photos) */
+    .port-ph {
+      width: 100%;
+      aspect-ratio: var(--ar, 1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(32px, 5vw, 56px);
+      position: relative;
+    }
+    .port-ph::after {
+      content: attr(data-caption);
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 40px 16px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,.75), transparent);
+      color: white; font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      opacity: 0; transition: opacity .3s;
+    }
+
+    .port-item-overlay {
+      position: absolute; inset: 0;
+      background: rgba(12,11,9,.5);
+      opacity: 0; transition: opacity .3s;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .port-item-overlay span {
+      font-family: var(--font-display);
+      font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+      color: white;
+    }
+    .port-item-overlay .port-cat-badge {
+      background: var(--red); padding: 4px 14px;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      font-family: var(--font-mono); color: white;
+    }
+
+    /* Film strip accent row */
+    .filmstrip-row {
+      background: var(--ink);
+      padding: 24px var(--pad-x);
+      overflow: hidden;
+      display: flex; gap: 3px;
+      border-top: 1px solid rgba(255,255,255,.05);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      position: relative;
+    }
+    .filmstrip-row::before, .filmstrip-row::after {
+      content:''; position:absolute; top:0; bottom:0; width:20px; z-index:2;
+      background-image: repeating-linear-gradient(to bottom,transparent 0,transparent 6px,rgba(255,255,255,.18) 6px,rgba(255,255,255,.18) 14px);
+    }
+    .filmstrip-row::before { left:0; }
+    .filmstrip-row::after { right:0; }
+    .film-cell {
+      flex: 0 0 120px; height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+    .fc1 { background: linear-gradient(135deg,#1a0f0f,#2d1515); }
+    .fc2 { background: linear-gradient(135deg,#0f0f1a,#151528); }
+    .fc3 { background: linear-gradient(135deg,#0f1a0f,#152815); }
+    .fc4 { background: linear-gradient(135deg,#1a150f,#281f10); }
+    .fc5 { background: linear-gradient(135deg,#1a1a0f,#28280f); }
+    .fc6 { background: linear-gradient(135deg,#0f1a1a,#0f2828); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 8000;
+      background: rgba(12,11,9,.95);
+      display: none; align-items: center; justify-content: center;
+      padding: 40px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { position: relative; max-width: 900px; max-height: 90vh; width: 100%; }
+    #lb-img { width: 100%; max-height: 80vh; object-fit: contain; display: block; }
+    #lb-caption { margin-top: 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); text-align: center; }
+    #lb-close {
+      position: absolute; top: -48px; right: 0;
+      background: none; border: none; color: var(--paper);
+      font-family: var(--font-display); font-size: 14px; letter-spacing: 3px;
+      text-transform: uppercase; cursor: crosshair; padding: 8px 0;
+      transition: color .15s;
+    }
+    #lb-close:hover { color: var(--red); }
+
+    /* CTA band */
+    .port-cta-band {
+      background: var(--red); padding: 80px var(--pad-x); text-align: center;
+    }
+    .port-cta-band h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(40px,6vw,80px); color: white; text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
+    .port-cta-band p { font-family: var(--font-serif); font-style: italic; font-size: 18px; color: rgba(255,255,255,.75); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; }
+    .port-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      #portfolio-grid { columns: 2; }
+    }
+    @media (max-width: 560px) {
+      #portfolio-grid { columns: 1; }
+      .filter-bar { padding: 0 var(--pad-x); }
+      .port-section { padding: 40px var(--pad-x); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="flash-overlay"></div>
+<div class="toast" id="toast"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button id="lb-close">✕ Close</button>
+    <img id="lb-img" src="" alt=""/>
+    <p id="lb-caption"></p>
+  </div>
+</div>
+
+<!-- ── NAV ──────────────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-brand" href="index.html">BLACCT<em>OG</em>RAPHY</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="index.html#book" class="nav-book">Book Now →</a>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────────────── -->
+<div class="port-hero">
+  <div class="port-hero-inner">
+    <span class="section-kicker">The Work</span>
+    <h2 class="section-title sr">PORTFOLIO</h2>
+    <p class="port-hero-sub sr sr-delay-1">Real moments. Real energy. Documented on a phone — exactly the way they felt.</p>
+  </div>
+</div>
+
+<!-- ── FILMSTRIP ACCENT ──────────────────────────────────────────── -->
+<div class="filmstrip-row">
+  <div class="film-cell fc1">🎉</div>
+  <div class="film-cell fc2">🔥</div>
+  <div class="film-cell fc3">📸</div>
+  <div class="film-cell fc4">🎵</div>
+  <div class="film-cell fc5">⚡</div>
+  <div class="film-cell fc6">🌴</div>
+  <div class="film-cell fc1">🎉</div>
+  <div class="film-cell fc2">🔥</div>
+  <div class="film-cell fc3">📸</div>
+  <div class="film-cell fc4">🎵</div>
+  <div class="film-cell fc5">⚡</div>
+  <div class="film-cell fc6">🌴</div>
+</div>
+
+<!-- ── FILTER BAR ────────────────────────────────────────────────── -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Work <span class="filter-count">12</span></button>
+  <button class="filter-btn" data-filter="events">Events <span class="filter-count">5</span></button>
+  <button class="filter-btn" data-filter="content">Content Sessions <span class="filter-count">4</span></button>
+  <button class="filter-btn" data-filter="nightlife">Nightlife <span class="filter-count">3</span></button>
+</div>
+
+<!-- ── PORTFOLIO GRID ────────────────────────────────────────────── -->
+<!--
+  HOW TO ADD YOUR REAL PHOTOS:
+  Replace each .port-ph div with an <img> tag pointing to your photo:
+    <img src="images/your-photo.jpg" alt="Description" class="port-item-img"/>
+  Keep the parent .port-item div with its data-cat and data-caption attributes.
+  Upload your photos to the /images/ folder in the repo.
+-->
+<section class="port-section">
+  <div class="port-section-inner">
+    <div id="portfolio-grid">
+
+      <div class="port-item sr" data-cat="events" data-caption="Packed House · DC 2025" data-src="">
+        <div class="port-ph fc1" style="--ar:1" data-caption="Events · DC">🎉</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Events</span>
+          <span>Packed House · DC</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-1" data-cat="nightlife" data-caption="Club Night · PG County" data-src="">
+        <div class="port-ph fc2" style="--ar:4/5" data-caption="Nightlife · PG County">🔥</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Nightlife</span>
+          <span>Club Night · PG County</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-2" data-cat="content" data-caption="Street Session · DC" data-src="">
+        <div class="port-ph fc3" style="--ar:3/4" data-caption="Content · DC">📷</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Content</span>
+          <span>Street Session · DC</span>
+        </div>
+      </div>
+
+      <div class="port-item sr" data-cat="events" data-caption="Spring Break · DMV 2025" data-src="">
+        <div class="port-ph fc4" style="--ar:4/3" data-caption="Events · DMV">🌴</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Events</span>
+          <span>Spring Break · DMV 2025</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-1" data-cat="content" data-caption="Lifestyle Shoot · NoVA" data-src="">
+        <div class="port-ph fc5" style="--ar:1" data-caption="Content · NoVA">✨</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Content</span>
+          <span>Lifestyle · NoVA</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-2" data-cat="nightlife" data-caption="Flash Night · DC" data-src="">
+        <div class="port-ph fc6" style="--ar:3/4" data-caption="Nightlife · DC">⚡</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Nightlife</span>
+          <span>Flash Night · DC</span>
+        </div>
+      </div>
+
+      <div class="port-item sr" data-cat="events" data-caption="Concert Coverage · DMV" data-src="">
+        <div class="port-ph fc2" style="--ar:1" data-caption="Events · Concert">🎵</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Events</span>
+          <span>Concert Coverage · DMV</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-1" data-cat="content" data-caption="Brand Session · Silver Spring" data-src="">
+        <div class="port-ph fc1" style="--ar:4/5" data-caption="Content · Silver Spring">📸</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Content</span>
+          <span>Brand Session · Silver Spring</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-2" data-cat="nightlife" data-caption="After Hours · DC" data-src="">
+        <div class="port-ph fc3" style="--ar:1" data-caption="Nightlife · After Hours">🌙</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Nightlife</span>
+          <span>After Hours · DC</span>
+        </div>
+      </div>
+
+      <div class="port-item sr" data-cat="events" data-caption="Private Party · Bowie" data-src="">
+        <div class="port-ph fc5" style="--ar:4/3" data-caption="Events · Bowie">🎊</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Events</span>
+          <span>Private Party · Bowie</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-1" data-cat="content" data-caption="Vertical Video · TikTok" data-src="">
+        <div class="port-ph fc4" style="--ar:9/16" data-caption="Content · Vertical">🎬</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Content</span>
+          <span>Vertical Video · TikTok</span>
+        </div>
+      </div>
+
+      <div class="port-item sr sr-delay-2" data-cat="events" data-caption="VIP Section · NoVA" data-src="">
+        <div class="port-ph fc6" style="--ar:1" data-caption="Events · VIP">👑</div>
+        <div class="port-item-overlay">
+          <span class="port-cat-badge">Events</span>
+          <span>VIP Section · NoVA</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Prints CTA -->
+    <div style="margin-top:60px; padding:40px; background:var(--cream); border:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;" class="sr">
+      <div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Want Prints?</div>
+        <p style="font-size:13px;color:var(--mid);">Order physical prints from the Blacctography print shop — powered by Pixieset.</p>
+      </div>
+      <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener" class="btn-primary">Visit Print Shop →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ──────────────────────────────────────────────────── -->
+<div class="port-cta-band">
+  <h2>WANT THIS FOR<br/>YOUR EVENT?</h2>
+  <p>Event coverage starts at $150. Same-week delivery. DMV only. Let's document your next one.</p>
+  <div class="port-cta-btns">
+    <a href="index.html#book" class="btn-ghost-light" style="border-color:rgba(255,255,255,.4)">Book Now →</a>
+    <a href="https://instagram.com/blacctography" target="_blank" rel="noopener" class="btn-ghost-light" style="border-color:rgba(255,255,255,.4)">@blacctography</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div>
+      <a href="index.html" class="foot-brand-name">BLACCT<em>OG</em>RAPHY</a>
+      <p class="foot-tagline">"Your OC Photography Man"</p>
+      <div class="foot-socials">
+        <a href="https://instagram.com/blacctography" target="_blank" rel="noopener" class="foot-social-btn">IG → @blacctography</a>
+        <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener" class="foot-social-btn">Print Shop →</a>
+        <a href="mailto:connectwithblaccmatter@gmail.com" class="foot-social-btn">Email →</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-col-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-col-links">
+        <li><a href="index.html#pricing">Event Coverage</a></li>
+        <li><a href="index.html#pricing">Content Sessions</a></li>
+        <li><a href="index.html#pricing">Spring Break</a></li>
+        <li><a href="index.html#pricing">Monthly Subscription</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">DMV Areas</div>
+      <ul class="footer-col-links">
+        <li><a href="#">Washington DC</a></li>
+        <li><a href="#">PG County</a></li>
+        <li><a href="#">Northern Virginia</a></li>
+        <li><a href="#">Silver Spring</a></li>
+        <li><a href="#">College Park</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Blacctography · DMV Mobile Photography</p>
+    <div class="footer-legal">
+      <a href="mailto:connectwithblaccmatter@gmail.com">Contact</a>
+      <a href="https://instagram.com/blacctography" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener">Print Shop</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
