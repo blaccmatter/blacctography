@@ -1,369 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Contact Blacctography — Book your DMV event, content session, or monthly subscription. DM on Instagram or email connectwithblaccmatter@gmail.com."/>
-  <title>Contact — BLACCTOGRAPHY</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css"/>
-  <style>
+# BLACCTOGRAPHY — Website
 
-    /* CONTACT HERO */
-    .contact-hero {
-      background: var(--red);
-      padding: 110px var(--pad-x) 80px;
-      position: relative; overflow: hidden;
-    }
-    .contact-hero::before {
-      content:''; position:absolute; inset:0;
-      background: repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(0,0,0,.04) 10px,rgba(0,0,0,.04) 20px);
-      pointer-events:none;
-    }
-    .contact-hero-inner { max-width:var(--max-w); margin:0 auto; position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; }
-    .contact-hero .section-kicker { color:rgba(255,255,255,.7); }
-    .contact-hero .section-kicker::before { background:rgba(255,255,255,.7); }
-    .contact-hero .section-title { color:white; font-size:clamp(64px,9vw,128px); line-height:.9; }
-    .contact-hero-right { }
-    .contact-hero-tagline { font-family:var(--font-serif); font-style:italic; font-size:clamp(17px,2vw,22px); color:rgba(255,255,255,.7); line-height:1.7; margin-bottom:32px; }
-    .contact-hero-tagline strong { color:white; font-style:normal; }
+> "Your OC Photography Man" · Mobile Phone Photography · DMV Area
 
-    /* Quick links */
-    .quick-channels {
-      display: grid; grid-template-columns: 1fr; gap: var(--gap);
-    }
-    .channel-card {
-      background: rgba(0,0,0,.2);
-      border: 1px solid rgba(255,255,255,.15);
-      padding: 20px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 16px;
-      text-decoration: none;
-      transition: background .2s, border-color .2s;
-    }
-    .channel-card:hover { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.35); }
-    .channel-left { display:flex; align-items:center; gap:14px; }
-    .channel-icon { font-size:22px; }
-    .channel-label { font-family:var(--font-display); font-weight:600; font-size:14px; letter-spacing:2px; text-transform:uppercase; color:white; }
-    .channel-sub { font-size:11px; color:rgba(255,255,255,.55); letter-spacing:1px; margin-top:2px; }
-    .channel-arrow { font-family:var(--font-mono); font-size:14px; color:rgba(255,255,255,.5); }
+---
 
-    /* MAIN CONTACT LAYOUT */
-    .contact-main { padding:100px var(--pad-x); }
-    .contact-main-inner { max-width:var(--max-w); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+## 🚀 How to Deploy to GitHub Pages
 
-    /* Left info column */
-    .contact-info h3 { font-family:var(--font-display); font-weight:700; font-size:28px; text-transform:uppercase; letter-spacing:2px; margin-bottom:24px; }
-    .contact-info-items { display:flex; flex-direction:column; gap:var(--gap); background:var(--border); border:1px solid var(--border); margin-bottom:48px; }
-    .cinfo-item { background:var(--paper); padding:20px 22px; display:flex; gap:16px; align-items:flex-start; }
-    .cinfo-icon { font-size:20px; flex-shrink:0; margin-top:2px; }
-    .cinfo-label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:4px; font-family:var(--font-mono); }
-    .cinfo-value { font-size:14px; color:var(--ink); line-height:1.6; }
-    .cinfo-value a { color:var(--ink); text-decoration:none; transition:color .15s; }
-    .cinfo-value a:hover { color:var(--red); }
+### Step 1 — Create a GitHub Repo
+1. Go to [github.com](https://github.com) and sign in (or create a free account)
+2. Click **"New repository"**
+3. Name it exactly: `blacctography` (or your GitHub username repo for a root URL)
+4. Set it to **Public**
+5. Click **"Create repository"**
 
-    .booking-note { background:var(--cream); border:1px solid var(--border); padding:28px; }
-    .booking-note-title { font-family:var(--font-display); font-weight:700; font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--amber); margin-bottom:16px; }
-    .booking-note-items { list-style:none; display:flex; flex-direction:column; gap:10px; }
-    .booking-note-items li { font-size:12px; color:var(--mid); display:flex; gap:10px; align-items:flex-start; line-height:1.6; }
-    .booking-note-items li::before { content:'→'; color:var(--red); flex-shrink:0; font-family:var(--font-mono); }
+### Step 2 — Upload the Files
+1. On your new repo page, click **"uploading an existing file"**
+2. Drag and drop **all files and folders** from this zip:
+   - `index.html`
+   - `portfolio.html`
+   - `about.html`
+   - `contact.html`
+   - `css/style.css`
+   - `js/main.js`
+   - `images/` folder (add your photos here — see below)
+3. Click **"Commit changes"**
 
-    /* Right form column */
-    .contact-form-wrap { }
-    .contact-form-title { font-family:var(--font-display); font-weight:700; font-size:22px; text-transform:uppercase; letter-spacing:2px; margin-bottom:28px; }
+### Step 3 — Enable GitHub Pages
+1. Go to your repo **Settings** tab
+2. Scroll to **Pages** in the left sidebar
+3. Under **Source**, select `main` branch and `/ (root)` folder
+4. Click **Save**
+5. Your site will be live at: `https://yourusername.github.io/blacctography/`
 
-    .cform { display:flex; flex-direction:column; gap:var(--gap); background:var(--border); }
-    .cfield { background:var(--paper); }
-    .cfield.half-grid { background:transparent; display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); }
-    .cfield label { display:block; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--red); padding:14px 18px 4px; }
-    .cfield input, .cfield select, .cfield textarea { display:block; width:100%; background:transparent; border:none; border-bottom:2px solid transparent; padding:4px 18px 16px; font-family:var(--font-mono); font-size:14px; color:var(--ink); outline:none; cursor:crosshair; transition:border-color .2s; -webkit-appearance:none; appearance:none; }
-    .cfield input:focus, .cfield select:focus, .cfield textarea:focus { border-bottom-color:var(--red); }
-    .cfield select option { background:var(--paper); }
-    .cfield textarea { resize:none; height:140px; }
-    .chalf { background:var(--paper); }
-    .cform-submit { background:var(--ink); color:var(--paper); border:none; padding:22px; font-family:var(--font-display); font-weight:700; font-size:22px; letter-spacing:5px; text-transform:uppercase; cursor:crosshair; transition:background .2s, letter-spacing .3s; }
-    .cform-submit:hover { background:var(--red); letter-spacing:8px; }
+---
 
-    /* FAQ */
-    .faq-section { background:var(--cream); padding:100px var(--pad-x); border-top:1px solid var(--border); }
-    .faq-inner { max-width:var(--max-w); margin:0 auto; }
-    .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); background:var(--border); border:1px solid var(--border); margin-top:56px; }
-    .faq-item { background:var(--paper); padding:36px; }
-    .faq-q { font-family:var(--font-display); font-weight:600; font-size:16px; letter-spacing:1px; text-transform:uppercase; color:var(--ink); margin-bottom:12px; display:flex; gap:12px; align-items:flex-start; }
-    .faq-q::before { content:'Q.'; color:var(--red); flex-shrink:0; }
-    .faq-a { font-size:13px; color:var(--mid); line-height:1.8; padding-left:28px; }
-    .faq-a strong { color:var(--ink); }
+## 📸 Adding Your Real Photos
 
-    @media (max-width:768px) {
-      .contact-hero-inner { grid-template-columns:1fr; }
-      .contact-main-inner { grid-template-columns:1fr; gap:48px; }
-      .faq-grid { grid-template-columns:1fr; }
-    }
-    @media (max-width:480px) {
-      .cfield.half-grid { grid-template-columns:1fr; }
-    }
-  </style>
-</head>
-<body>
+The portfolio page uses placeholder emoji blocks. To add your actual photos:
 
-<div id="flash-overlay"></div>
-<div class="toast" id="toast"></div>
+1. Put your photo files in the `/images/` folder
+2. Open `portfolio.html` and find each `.port-item` block
+3. Replace the `.port-ph` div with an `<img>` tag:
 
-<!-- NAV -->
-<nav>
-  <a class="nav-brand" href="index.html">BLACCT<em>OG</em>RAPHY</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="index.html#pricing">Pricing</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="contact.html#form" class="nav-book">Book Now →</a>
-  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
+```html
+<!-- BEFORE (placeholder) -->
+<div class="port-ph fc1" style="--ar:1" data-caption="Events · DC">🎉</div>
 
-<!-- HERO -->
-<div class="contact-hero">
-  <div class="contact-hero-inner">
-    <div>
-      <span class="section-kicker">Get In Touch</span>
-      <h1 class="section-title sr">LET'S<br/>TALK.</h1>
-    </div>
-    <div class="sr sr-delay-2">
-      <p class="contact-hero-tagline">
-        Ready to book? Have a question about a package?<br/>
-        <strong>Pick your preferred channel and let's make it happen.</strong>
-      </p>
-      <div class="quick-channels">
-        <a href="https://instagram.com/blacctography" target="_blank" rel="noopener" class="channel-card">
-          <div class="channel-left">
-            <span class="channel-icon">📸</span>
-            <div>
-              <div class="channel-label">Instagram DM</div>
-              <div class="channel-sub">@blacctography — fastest response</div>
-            </div>
-          </div>
-          <span class="channel-arrow">→</span>
-        </a>
-        <a href="mailto:connectwithblaccmatter@gmail.com" class="channel-card">
-          <div class="channel-left">
-            <span class="channel-icon">📧</span>
-            <div>
-              <div class="channel-label">Email</div>
-              <div class="channel-sub">connectwithblaccmatter@gmail.com</div>
-            </div>
-          </div>
-          <span class="channel-arrow">→</span>
-        </a>
-        <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener" class="channel-card">
-          <div class="channel-left">
-            <span class="channel-icon">🖼️</span>
-            <div>
-              <div class="channel-label">Print Shop</div>
-              <div class="channel-sub">Order physical prints — Pixieset</div>
-            </div>
-          </div>
-          <span class="channel-arrow">→</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- AFTER (real photo) -->
+<img src="images/your-photo.jpg" alt="Event coverage DC 2025" class="port-item-img" style="--ar:1"/>
+```
 
-<!-- MAIN CONTACT -->
-<section class="contact-main" id="form">
-  <div class="contact-main-inner">
+**Recommended image specs:**
+- Format: JPG or WebP
+- Width: 1200px max (keeps load times fast)
+- Quality: 80% compression
+- Name files clearly: `event-dc-march-2025.jpg`
 
-    <!-- Left Info -->
-    <div class="sr">
-      <h3>What to Include</h3>
-      <div class="contact-info-items">
-        <div class="cinfo-item">
-          <span class="cinfo-icon">🎪</span>
-          <div>
-            <div class="cinfo-label">Event Name</div>
-            <div class="cinfo-value">Name of your event or shoot. If it's a private party, who is it for?</div>
-          </div>
-        </div>
-        <div class="cinfo-item">
-          <span class="cinfo-icon">📱</span>
-          <div>
-            <div class="cinfo-label">Your Socials</div>
-            <div class="cinfo-value">Instagram handle required — for tagging and portfolio publication.</div>
-          </div>
-        </div>
-        <div class="cinfo-item">
-          <span class="cinfo-icon">📍</span>
-          <div>
-            <div class="cinfo-label">Location</div>
-            <div class="cinfo-value">Venue address for events. Studio / location for content sessions.</div>
-          </div>
-        </div>
-        <div class="cinfo-item">
-          <span class="cinfo-icon">👥</span>
-          <div>
-            <div class="cinfo-label">Projected Capacity</div>
-            <div class="cinfo-value">Approx. how many people? Not needed for solo shoots.</div>
-          </div>
-        </div>
-        <div class="cinfo-item">
-          <span class="cinfo-icon">🕐</span>
-          <div>
-            <div class="cinfo-label">Arrival Time</div>
-            <div class="cinfo-value">VERY important for scheduling. What time do you need me there?</div>
-          </div>
-        </div>
-        <div class="cinfo-item" style="border:none;">
-          <span class="cinfo-icon">✉️</span>
-          <div>
-            <div class="cinfo-label">Direct Email</div>
-            <div class="cinfo-value"><a href="mailto:connectwithblaccmatter@gmail.com">connectwithblaccmatter@gmail.com</a></div>
-          </div>
-        </div>
-      </div>
+---
 
-      <div class="booking-note">
-        <div class="booking-note-title">⚡ Spring Break 2025 — Limited Dates</div>
-        <ul class="booking-note-items">
-          <li>Event coverage: <strong style="color:var(--ink)">$150 – 300</strong> flat rate</li>
-          <li>Content sessions: <strong style="color:var(--ink)">$250 – 600</strong> per session</li>
-          <li>Monthly subscription: <strong style="color:var(--ink)">$500 – 1,500/mo</strong></li>
-          <li>Spring Break dates March 10 – April 6, 2025</li>
-          <li>Same-week delivery on all packages</li>
-          <li>DMV area only — DC, PG County, NoVA</li>
-        </ul>
-      </div>
-    </div>
+## 📁 File Structure
 
-    <!-- Right Form -->
-    <div class="sr sr-delay-2">
-      <div class="contact-form-title">Send a Booking Request</div>
-      <div class="cform">
-        <div class="cfield half-grid">
-          <div class="chalf cfield"><label>Your Name</label><input type="text" id="c-name" placeholder="What do people call you?"/></div>
-          <div class="chalf cfield"><label>Instagram Handle</label><input type="text" id="c-ig" placeholder="@yourhandle"/></div>
-        </div>
-        <div class="cfield"><label>Email Address</label><input type="email" id="c-email" placeholder="your@email.com"/></div>
-        <div class="cfield half-grid">
-          <div class="chalf cfield">
-            <label>Inquiry Type</label>
-            <select id="c-subject">
-              <option value="">Select...</option>
-              <option>Event Coverage ($150–300)</option>
-              <option>Content Creation Session ($250–600)</option>
-              <option>Spring Break Booking</option>
-              <option>Monthly Subscription ($500–1,500)</option>
-              <option>Print Shop / Prints</option>
-              <option>General Question</option>
-            </select>
-          </div>
-          <div class="chalf cfield">
-            <label>Preferred Contact</label>
-            <select>
-              <option value="">Select...</option>
-              <option>Instagram DM</option>
-              <option>Email reply</option>
-              <option>Either works</option>
-            </select>
-          </div>
-        </div>
-        <div class="cfield"><label>Your Message</label><textarea id="c-message" placeholder="Event details, dates, location, vibe — the more you tell me, the better I can prepare. Include your arrival time if booking an event."></textarea></div>
-        <button class="cform-submit" onclick="submitContactForm()">SEND MESSAGE →</button>
-      </div>
-      <p style="margin-top:16px;font-size:11px;letter-spacing:2px;color:var(--mid);text-align:center;text-transform:uppercase;">Response within 24 hours · DM for faster replies</p>
-    </div>
+```
+blacctography/
+├── index.html          → Homepage (hero, pricing, booking form, testimonials)
+├── portfolio.html      → Portfolio grid with category filter + lightbox
+├── about.html          → About / story / philosophy page
+├── contact.html        → Contact form + FAQ
+├── css/
+│   └── style.css       → All shared styles (tokens, nav, footer, animations)
+├── js/
+│   └── main.js         → Shared JavaScript (flash effect, scroll reveal, forms)
+├── images/             → Add your photos here
+│   └── .gitkeep
+└── README.md           → This file
+```
 
-  </div>
-</section>
+---
 
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="faq-inner">
-    <span class="section-kicker">FAQ</span>
-    <h2 class="section-title sr">COMMON<br/>QUESTIONS.</h2>
-    <div class="faq-grid sr sr-delay-1">
-      <div class="faq-item">
-        <div class="faq-q">Do you only shoot in the DMV?</div>
-        <p class="faq-a">Yes. <strong>DC, PG County, and Northern Virginia only.</strong> This isn't a national operation — the local focus is intentional. I know the venues, the culture, and the scene here. That familiarity shows in the work.</p>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">How fast do I get my photos?</div>
-        <p class="faq-a"><strong>Same-week delivery on everything.</strong> For events, you get a preview set the same night. The full edited gallery comes within 48 hours. No waiting two weeks while the hype dies.</p>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Everything really shot on a phone?</div>
-        <p class="faq-a">100%. That's the entire point. <strong>Mobile photos live on the same device your guests are scrolling on.</strong> They translate perfectly to Instagram, TikTok, and Reels without any compression or reformatting gymnastics.</p>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What's the 2016 aesthetic exactly?</div>
-        <p class="faq-a">Flash photography, motion blur, candid moments, real color. <strong>Before everything got desaturated and "cinematic."</strong> Photos that feel like a memory, not a product shoot. Vine-era energy in a 2025 context.</p>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Can I book multiple dates?</div>
-        <p class="faq-a">Yes — and the <strong>Monthly Subscription ($500–1,500/mo)</strong> is built exactly for that. Consistent content across 1–2 shoots per month, cohesive aesthetic maintained, priority scheduling all season.</p>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do I own the photos?</div>
-        <p class="faq-a">You receive fully edited files you can post anywhere. <strong>Blacctography retains the right to use images in the portfolio</strong> and social media — which is standard practice and also free marketing for your event.</p>
-      </div>
-    </div>
-  </div>
-</section>
+## ✏️ Customization Notes
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="footer-main">
-    <div>
-      <a href="index.html" class="foot-brand-name">BLACCT<em>OG</em>RAPHY</a>
-      <p class="foot-tagline">"Your OC Photography Man"</p>
-      <div class="foot-socials">
-        <a href="https://instagram.com/blacctography" target="_blank" rel="noopener" class="foot-social-btn">IG → @blacctography</a>
-        <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener" class="foot-social-btn">Print Shop →</a>
-        <a href="mailto:connectwithblaccmatter@gmail.com" class="foot-social-btn">Email →</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Navigate</div>
-      <ul class="footer-col-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Services</div>
-      <ul class="footer-col-links">
-        <li><a href="index.html#pricing">Event Coverage</a></li>
-        <li><a href="index.html#pricing">Content Sessions</a></li>
-        <li><a href="index.html#pricing">Spring Break</a></li>
-        <li><a href="index.html#pricing">Monthly Subscription</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">DMV Areas</div>
-      <ul class="footer-col-links">
-        <li><a href="#">Washington DC</a></li>
-        <li><a href="#">PG County</a></li>
-        <li><a href="#">Northern Virginia</a></li>
-        <li><a href="#">Silver Spring</a></li>
-        <li><a href="#">College Park</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Blacctography · DMV Mobile Photography</p>
-    <div class="footer-legal">
-      <a href="mailto:connectwithblaccmatter@gmail.com">Contact</a>
-      <a href="https://instagram.com/blacctography" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener">Print Shop</a>
-    </div>
-  </div>
-</footer>
+- **Colors**: Edit the CSS variables at the top of `css/style.css` under `:root {}`
+- **Pricing**: Update prices in `index.html` (search for `$150`, `$250`, `$500`)
+- **Email**: Replace `connectwithblaccmatter@gmail.com` throughout all files
+- **Instagram**: Replace `@blacctography` / `instagram.com/blacctography` throughout
+- **Pixieset**: Replace `blacctographyinc.pixieset.com` throughout
 
-<script src="js/main.js"></script>
-</body>
-</html>
+---
+
+## 🔗 External Links (pre-configured)
+- Instagram: https://instagram.com/blacctography
+- Print Shop: https://blacctographyinc.pixieset.com
+- Email: connectwithblaccmatter@gmail.com
+
+---
+
+© 2025 Blacctography · DMV Mobile Photography
