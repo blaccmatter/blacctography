@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Blacctography — Your OC Photography Man. Mobile phone photography for DMV events, concerts, parties, and content creation. Flash photos. Real energy. Same-week delivery."/>
+  <meta name="keywords" content="DMV photographer, event photography, mobile photographer, Washington DC, PG County, Northern Virginia, party photographer, concert photographer, flash photography"/>
+  <meta property="og:title" content="BLACCTOGRAPHY — Your OC Photography Man"/>
+  <meta property="og:description" content="Not a studio. Not a tripod. Not stiff poses. Mobile phone photography for DMV events."/>
+  <meta property="og:type" content="website"/>
+  <title>BLACCTOGRAPHY — Your OC Photography Man</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* ── INDEX-SPECIFIC ─────────────────────────────────────────── */
+
+    /* HERO */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(255,255,255,.015) 3px, rgba(255,255,255,.015) 4px
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      padding: 100px var(--pad-x) 70px;
+      gap: 40px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-kicker {
+      font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+      animation: fadeUp .5s .1s ease both;
+    }
+    .hero-kicker::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--amber); }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(72px, 10vw, 148px);
+      line-height: .9;
+      letter-spacing: -1px;
+      color: var(--paper);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      animation: fadeUp .6s .25s ease both;
+    }
+    .hero h1 .red { color: var(--red); }
+    .hero h1 .outline { -webkit-text-stroke: 1.5px var(--paper); color: transparent; }
+    .hero-tagline {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: clamp(16px, 2vw, 21px);
+      color: rgba(245,240,232,.55); line-height: 1.7;
+      max-width: 400px; margin-bottom: 48px;
+      animation: fadeUp .6s .4s ease both;
+    }
+    .hero-tagline strong { color: var(--paper); font-style: normal; font-family: var(--font-mono); font-size: .85em; font-weight: 500; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp .6s .55s ease both; }
+
+    /* Polaroid stack */
+    .hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 20px; animation: fadeUp .7s .35s ease both; }
+    .polaroid-stack { position: relative; width: 240px; height: 300px; }
+    .polaroid { position: absolute; background: white; padding: 14px 14px 48px; box-shadow: 0 8px 48px rgba(0,0,0,.55); width: 204px; cursor: crosshair; transition: transform .3s; }
+    .polaroid:nth-child(1) { transform: rotate(-6deg) translate(10px, 24px); z-index: 1; }
+    .polaroid:nth-child(2) { transform: rotate(3deg) translate(42px, 4px); z-index: 2; }
+    .polaroid:nth-child(3) { transform: rotate(-1deg) translate(22px, 12px); z-index: 3; }
+    .polaroid:nth-child(3):hover { transform: rotate(0deg) translate(22px, -4px) scale(1.04); z-index: 10; }
+    .polaroid-ph { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 42px; }
+    .polaroid-ph.d { background: linear-gradient(135deg,#1a0f0f,#2d1515); }
+    .polaroid-ph.m { background: linear-gradient(135deg,#0f0f1a,#151528); }
+    .polaroid-ph.w { background: linear-gradient(135deg,#0f1a0f,#152815); }
+    .polaroid-cap { margin-top: 10px; font-family: var(--font-serif); font-size: 12px; font-style: italic; color: #555; text-align: center; }
+    .hero-stats { display: flex; border: 1px solid rgba(245,240,232,.08); }
+    .hero-stat { padding: 14px 22px; border-right: 1px solid rgba(245,240,232,.08); text-align: center; }
+    .hero-stat:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-weight: 700; font-size: 28px; color: var(--paper); display: block; line-height: 1; }
+    .stat-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-top: 4px; display: block; }
+
+    /* PROOF BAR */
+    .proof-bar {
+      background: var(--cream);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(4,1fr);
+    }
+    .proof-item { padding: 40px 32px; border-right: 1px solid var(--border); text-align: center; }
+    .proof-item:last-child { border-right: none; }
+    .proof-num { font-family: var(--font-display); font-weight: 700; font-size: 52px; color: var(--red); line-height: 1; display: block; }
+    .proof-lbl { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-top: 8px; display: block; }
+
+    /* STATEMENT */
+    .statement {
+      background: var(--paper); border-bottom: 1px solid var(--border);
+      padding: 80px var(--pad-x);
+    }
+    .statement-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: center; }
+    .statement-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; transform: rotate(180deg); }
+    .statement-quote { font-family: var(--font-display); font-weight: 300; font-size: clamp(28px, 4vw, 54px); line-height: 1.15; text-transform: uppercase; color: var(--ink); }
+    .statement-quote strong { font-weight: 700; }
+    .statement-quote em { font-style: normal; color: var(--red); }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--gap); background: var(--border); border: 1px solid var(--border); }
+    .svc-card { background: var(--paper); padding: 44px 36px; position: relative; overflow: hidden; transition: background .25s; }
+    .svc-card:hover { background: var(--cream); }
+    .svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent,var(--red)); transform:scaleX(0); transform-origin:left; transition:transform .3s; }
+    .svc-card:hover::before { transform:scaleX(1); }
+    .svc-icon { font-size: 32px; margin-bottom: 20px; display: block; }
+    .svc-title { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .svc-price { font-family: var(--font-display); font-weight: 300; font-size: 36px; color: var(--red); line-height: 1; margin-bottom: 16px; }
+    .svc-desc { font-size: 13px; line-height: 1.75; color: var(--mid); margin-bottom: 24px; }
+    .svc-list { list-style: none; }
+    .svc-list li { font-size: 12px; padding: 6px 0; border-top: 1px solid var(--border); color: var(--ink); display: flex; gap: 8px; }
+    .svc-list li::before { content: '→'; color: var(--red); flex-shrink: 0; font-family: var(--font-mono); }
+
+    /* SUBSCRIPTION BANNER */
+    .sub-banner {
+      background: var(--ink); border: 1px solid rgba(255,255,255,.05);
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+      gap: 48px; padding: 40px var(--pad-x); margin-top: var(--gap);
+    }
+    .sub-icon-lg { font-size: 36px; }
+    .sub-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 3px; text-transform: uppercase; color: var(--paper); margin-bottom: 6px; }
+    .sub-perks { display: flex; gap: 20px; flex-wrap: wrap; }
+    .sub-perk { font-size: 11px; color: var(--mid); letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+    .sub-perk::before { content: '·'; color: var(--amber); }
+    .sub-rate { font-family: var(--font-display); font-weight: 700; font-size: 38px; color: var(--amber); white-space: nowrap; }
+    .sub-rate small { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 400; color: var(--mid); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* PROCESS STEPS */
+    .steps-grid { display: grid; grid-template-columns: repeat(5,1fr); background: var(--border); border: 1px solid var(--border); gap: var(--gap); }
+    .step { background: var(--paper); padding: 40px 28px; position: relative; }
+    .step-num { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: 1; color: rgba(12,11,9,.05); position: absolute; top: 16px; right: 16px; }
+    .step-icon { font-size: 26px; margin-bottom: 16px; display: block; }
+    .step-title { font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+    .step-body { font-size: 12px; color: var(--mid); line-height: 1.75; }
+    .step-body strong { color: var(--ink); }
+
+    /* TESTIMONIALS */
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--gap); background: var(--border); }
+    .testi-card { background: var(--ink); padding: 40px 36px; }
+    .testi-quote { font-family: var(--font-serif); font-size: 15px; line-height: 1.85; color: rgba(245,240,232,.8); font-style: italic; margin-bottom: 28px; }
+    .testi-quote::before { content:'\201C'; font-family:var(--font-display); font-size:52px; color:var(--red); line-height:.4; display:block; margin-bottom:18px; font-style:normal; }
+    .testi-meta { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 16px; font-weight: 700; flex-shrink: 0; }
+    .testi-stars { color: var(--amber); font-size: 12px; letter-spacing: 2px; margin-bottom: 3px; }
+    .testi-name { font-size: 13px; font-weight: 500; color: var(--paper); }
+    .testi-role { font-size: 10px; color: var(--mid); font-family: var(--font-mono); letter-spacing: 1px; }
+
+    /* BOOKING SECTION */
+    .booking-section { background: var(--paper); border-top: 1px solid var(--border); }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .booking-manifesto { font-family: var(--font-display); font-weight: 300; font-size: clamp(26px,3.5vw,48px); line-height: 1.15; text-transform: uppercase; margin-bottom: 36px; }
+    .booking-manifesto strong { font-weight: 700; }
+    .booking-manifesto em { font-style: normal; color: var(--red); }
+    .booking-info { border: 1px solid var(--border); background: var(--cream); }
+    .binfo-row { display: flex; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 12px; align-items: flex-start; }
+    .binfo-row:last-child { border-bottom: none; }
+    .binfo-lbl { font-family: var(--font-display); font-weight: 600; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); width: 100px; flex-shrink: 0; padding-top: 1px; }
+    .binfo-val { color: var(--ink); line-height: 1.6; }
+
+    /* Form */
+    .bform { display: flex; flex-direction: column; gap: var(--gap); background: var(--border); }
+    .bfield { background: var(--paper); }
+    .bfield.half-grid { background: transparent; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+    .bfield label { display: block; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); padding: 14px 18px 4px; }
+    .bfield input, .bfield select, .bfield textarea { display: block; width: 100%; background: transparent; border: none; border-bottom: 2px solid transparent; padding: 4px 18px 16px; font-family: var(--font-mono); font-size: 14px; color: var(--ink); outline: none; cursor: crosshair; transition: border-color .2s; -webkit-appearance: none; appearance: none; }
+    .bfield input:focus, .bfield select:focus, .bfield textarea:focus { border-bottom-color: var(--red); }
+    .bfield select option { background: var(--paper); }
+    .bfield textarea { resize: none; height: 110px; }
+    .half-inner { background: var(--paper); }
+    .bform-submit { background: var(--ink); color: var(--paper); border: none; padding: 22px; font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 5px; text-transform: uppercase; cursor: crosshair; transition: background .2s, letter-spacing .3s; }
+    .bform-submit:hover { background: var(--red); letter-spacing: 8px; }
+    .form-ig-note { text-align: center; padding: 18px; background: var(--cream); font-size: 11px; letter-spacing: 2px; color: var(--mid); border-top: 1px solid var(--border); }
+    .form-ig-note a { color: var(--ink); font-family: var(--font-display); font-weight: 700; font-size: 13px; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
+    .form-ig-note a:hover { color: var(--red); }
+
+    /* DMV strip */
+    .dmv-strip { background: var(--amber); padding: 20px var(--pad-x); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(0,0,0,.08); }
+    .dmv-strip p { font-family: var(--font-display); font-size: 13px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--ink); }
+    .dmv-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .dmv-tag { background: rgba(0,0,0,.1); color: var(--ink); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; font-family: var(--font-mono); transition: background .15s; }
+    .dmv-tag:hover { background: rgba(0,0,0,.2); }
+
+    /* NEW SERVICES DIVIDER */
+    .services-divider {
+      display: flex; align-items: center; gap: 24px;
+      padding: 56px 0 48px;
+    }
+    .services-divider::before, .services-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .services-divider-label {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
+    }
+
+    /* DESIGN / VIDEO SECTION HEADERS */
+    .discipline-header {
+      display: grid; grid-template-columns: auto 1fr auto;
+      align-items: center; gap: 20px;
+      margin-bottom: 32px;
+    }
+    .discipline-header::after { content: ''; height: 1px; background: var(--border); }
+    .discipline-pill {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      padding: 6px 16px;
+      border: 1px solid currentColor;
+    }
+    .discipline-pill.design { color: var(--amber); border-color: var(--amber); }
+    .discipline-pill.video  { color: var(--red);   border-color: var(--red); }
+    .discipline-title {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(22px, 3vw, 34px); letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ADDONS ROW */
+    .addons-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      background: var(--border); border: 1px solid var(--border);
+      gap: var(--gap); margin-top: var(--gap);
+    }
+    .addon-item {
+      background: var(--cream);
+      padding: 18px 22px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .addon-name { font-size: 12px; letter-spacing: 1px; color: var(--ink); }
+    .addon-price {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 16px; color: var(--red); white-space: nowrap;
+    }
+
+    /* RESPONSIVE: index */
+    @media (max-width: 1024px) {
+      .proof-bar { grid-template-columns: repeat(2,1fr); }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid { grid-template-columns: repeat(3,1fr); }
+      .sub-banner { grid-template-columns: auto 1fr; }
+      .sub-rate { grid-column: 1/-1; }
+      .addons-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero-content { grid-template-columns: 1fr; padding: 80px var(--pad-x) 60px; }
+      .hero-right { display: none; }
+      .proof-bar { grid-template-columns: 1fr 1fr; }
+      .statement-inner { grid-template-columns: 1fr; }
+      .statement-label { writing-mode: horizontal-tb; transform: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .booking-grid { grid-template-columns: 1fr; gap: 48px; }
+      .sub-banner { grid-template-columns: 1fr; text-align: center; }
+      .sub-perks { justify-content: center; }
+      .dmv-strip { flex-direction: column; align-items: flex-start; }
+      .discipline-header { grid-template-columns: auto 1fr; }
+      .discipline-header::after { display: none; }
+      .addons-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .bfield.half-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="flash-overlay"></div>
+<div class="toast" id="toast"></div>
+
+<!-- ── NAVIGATION ───────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-brand" href="index.html">BLACCT<em>OG</em>RAPHY</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="index.html#book" class="nav-book">Book Now →</a>
+  <button class="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-left">
+      <p class="hero-kicker">Your OC Photography Man · DMV</p>
+      <h1>
+        REAL<br/>
+        <span class="outline">MOMENTS</span><br/>
+        <span class="red">CAPTURED.</span>
+      </h1>
+      <p class="hero-tagline">
+        Not a studio. Not a tripod. Not stiff poses.<br/>
+        <strong>Just a phone, flash, and perfect timing</strong> — documenting your event the way it actually felt.
+      </p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn-primary">Book Your Event →</a>
+        <a href="portfolio.html" class="btn-ghost-light">See the Work</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="polaroid-stack">
+        <div class="polaroid">
+          <div class="polaroid-ph d">🎉</div>
+          <div class="polaroid-cap">the vibe ✦ dc 2025</div>
+        </div>
+        <div class="polaroid">
+          <div class="polaroid-ph m">🔥</div>
+          <div class="polaroid-cap">packed house ✦ pg county</div>
+        </div>
+        <div class="polaroid">
+          <div class="polaroid-ph w">📸</div>
+          <div class="polaroid-cap">blacctography ✦ dmv</div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-num">$150</span>
+          <span class="stat-lbl">Events from</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-num">48h</span>
+          <span class="stat-lbl">Max turnaround</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-num">DMV</span>
+          <span class="stat-lbl">Only</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker-strip">
+    <span class="ticker-track">
+      Flash Photography <span class="dot">✦</span> Graphic Design <span class="dot">✦</span> Video Editing <span class="dot">✦</span> Washington DC <span class="dot">✦</span> PG County <span class="dot">✦</span> Northern Virginia <span class="dot">✦</span> Same-Week Delivery <span class="dot">✦</span> 2016 Nostalgic Vibes <span class="dot">✦</span> Built for the Gram <span class="dot">✦</span> No Stiff Poses <span class="dot">✦</span> Real Energy Only <span class="dot">✦</span>&nbsp;Flash Photography <span class="dot">✦</span> Graphic Design <span class="dot">✦</span> Video Editing <span class="dot">✦</span> Washington DC <span class="dot">✦</span> PG County <span class="dot">✦</span> Northern Virginia <span class="dot">✦</span> Same-Week Delivery <span class="dot">✦</span> 2016 Nostalgic Vibes <span class="dot">✦</span> Built for the Gram <span class="dot">✦</span> No Stiff Poses <span class="dot">✦</span> Real Energy Only <span class="dot">✦</span>&nbsp;
+    </span>
+  </div>
+</section>
+
+<!-- ── PROOF BAR ─────────────────────────────────────────────────── -->
+<div class="proof-bar sr">
+  <div class="proof-item">
+    <span class="proof-num">48h</span>
+    <span class="proof-lbl">Or Less — Full Gallery Delivered</span>
+  </div>
+  <div class="proof-item">
+    <span class="proof-num">100%</span>
+    <span class="proof-lbl">Shot on Mobile — Algorithm Ready</span>
+  </div>
+  <div class="proof-item">
+    <span class="proof-num">10+</span>
+    <span class="proof-lbl">Same-Night Edited Previews</span>
+  </div>
+  <div class="proof-item">
+    <span class="proof-num">DMV</span>
+    <span class="proof-lbl">Area Only — We Know the Scene</span>
+  </div>
+</div>
+
+<!-- ── STATEMENT ─────────────────────────────────────────────────── -->
+<div class="statement">
+  <div class="statement-inner sr">
+    <div class="statement-label">Philosophy</div>
+    <p class="statement-quote">
+      If you're <strong>outside, inside,</strong><br/>
+      celebrating, creating,<br/>
+      or just <em>living</em> —<br/>
+      <strong>I'm the one you call.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ── SERVICES / PRICING ─────────────────────────────────────────── -->
+<section class="section-pad" id="pricing">
+  <div class="max-w">
+    <span class="section-kicker">Services &amp; Pricing</span>
+    <h2 class="section-title sr">TRANSPARENT.<br/>FLAT-RATE.</h2>
+    <p class="section-body sr sr-delay-1" style="margin-bottom:56px;">All packages include editing, delivery, and social media posts. No hidden fees. No hourly surprises.</p>
+
+    <div class="services-grid sr sr-delay-2">
+      <div class="svc-card" style="--accent:var(--red)">
+        <span class="svc-icon">📸</span>
+        <div class="svc-title">Event Coverage</div>
+        <div class="svc-price">$150 – 300</div>
+        <p class="svc-desc">Parties, club nights, concerts, private events. Flash photography + short video clips + same-week delivery.</p>
+        <ul class="svc-list">
+          <li>Flash-style photography all night</li>
+          <li>Short video clips from the event</li>
+          <li>Fully edited final photos</li>
+          <li>Social-media-ready delivery</li>
+          <li>Same-week turnaround</li>
+          <li>Tagged posts for your page</li>
+        </ul>
+      </div>
+      <div class="svc-card" style="--accent:var(--amber); background:var(--ink);">
+        <span class="svc-icon">🎬</span>
+        <div class="svc-title" style="color:var(--paper)">Content Session</div>
+        <div class="svc-price" style="color:var(--amber)">$250 – 600</div>
+        <p class="svc-desc" style="color:var(--mid)">Lifestyle shoot — street, home, city, or nightlife. Photos + vertical video in one session. Edited and ready to post.</p>
+        <ul class="svc-list" style="--border:rgba(255,255,255,.08)">
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Lifestyle shoot (street / home / city)</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Photos + vertical video (Reels/TikTok)</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Edited + ready to post</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Graphics &amp; social media posts</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Cohesive 2016 nostalgic aesthetic</li>
+        </ul>
+      </div>
+      <div class="svc-card" style="--accent:var(--amber)">
+        <span class="svc-icon">🎟️</span>
+        <div class="svc-title">First-Timer Deal</div>
+        <div class="svc-price">15% OFF</div>
+        <p class="svc-desc">New to Blacctography? Your first booking gets 15% off any service — events or content sessions. Just mention the code.</p>
+        <ul class="svc-list">
+          <li>15% off your first booking</li>
+          <li>Applies to events &amp; content sessions</li>
+          <li>Mention code <strong>FIRSTSHOT</strong></li>
+          <li>One-time use per new client</li>
+          <li>Same-week delivery still included</li>
+          <li>No fine print — just book</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Subscription -->
+    <div class="sub-banner sr">
+      <div class="sub-icon-lg">🔁</div>
+      <div>
+        <div class="sub-title">Monthly Content Subscription</div>
+        <div class="sub-perks">
+          <span class="sub-perk">1 – 2 shoots per month</span>
+          <span class="sub-perk">Ongoing photo + video drops</span>
+          <span class="sub-perk">Cohesive aesthetic maintained</span>
+          <span class="sub-perk">Priority scheduling</span>
+        </div>
+      </div>
+      <div>
+        <div class="sub-rate">$500 – 1,500<small>/month</small></div>
+        <a href="#book" class="btn-primary" style="margin-top:12px;font-size:12px;padding:12px 22px;">Inquire →</a>
+      </div>
+    </div>
+
+    <!-- ── GRAPHIC DESIGN ─────────────────────────────────────────── -->
+    <div class="services-divider sr">
+      <span class="services-divider-label">Now Also Offering</span>
+    </div>
+
+    <div class="discipline-header sr">
+      <span class="discipline-pill design">Graphic Design</span>
+      <h3 class="discipline-title">Visual Identity &amp; Content</h3>
+    </div>
+
+    <div class="services-grid sr sr-delay-1">
+      <div class="svc-card" style="--accent:var(--amber)">
+        <span class="svc-icon">🖼️</span>
+        <div class="svc-title">Flyer &amp; Promo</div>
+        <div class="svc-price" style="color:var(--amber)">$50</div>
+        <p class="svc-desc">Event flyers, show promos, drop announcements — designed in the Blacctography aesthetic. Print and digital sizes included.</p>
+        <ul class="svc-list">
+          <li>1 concept, 2 revision rounds</li>
+          <li>Print + digital sizes</li>
+          <li>48hr turnaround</li>
+          <li>File delivery (PNG + PDF)</li>
+        </ul>
+      </div>
+
+      <div class="svc-card" style="--accent:var(--amber); background:var(--ink);">
+        <span class="svc-icon">📲</span>
+        <div class="svc-title" style="color:var(--paper)">Social Content Kit</div>
+        <div class="svc-price" style="color:var(--amber)">$120 / month</div>
+        <p class="svc-desc" style="color:var(--mid)">8 branded graphics per month — feed posts, story templates, and promo assets all locked to your visual identity.</p>
+        <ul class="svc-list" style="--border:rgba(255,255,255,.08)">
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">8 branded graphics/month</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Story + feed sizes included</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Blacctography visual style</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Unlimited minor revisions</li>
+        </ul>
+      </div>
+
+      <div class="svc-card" style="--accent:var(--amber)">
+        <span class="svc-icon">🎨</span>
+        <div class="svc-title">Brand Starter</div>
+        <div class="svc-price" style="color:var(--amber)">$250</div>
+        <p class="svc-desc">Logo, color palette, font guide, and 3 branded templates. Built for new businesses, artists, and musicians who need a complete look fast.</p>
+        <ul class="svc-list">
+          <li>Logo — 2 concepts</li>
+          <li>Color palette + font guide</li>
+          <li>3 branded templates</li>
+          <li>3 revision rounds total</li>
+          <li>One-time flat rate</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── VIDEO EDITING & VIDEOGRAPHY ───────────────────────────── -->
+    <div class="discipline-header sr" style="margin-top:56px;">
+      <span class="discipline-pill video">Video</span>
+      <h3 class="discipline-title">Editing &amp; Videography</h3>
+    </div>
+
+    <div class="services-grid sr sr-delay-1">
+      <div class="svc-card" style="--accent:var(--red)">
+        <span class="svc-icon">✂️</span>
+        <div class="svc-title">Reel Edit</div>
+        <div class="svc-price">$60</div>
+        <p class="svc-desc">You shoot, I edit. Send your raw footage and get back a polished short-form cut — captions, music sync, and IG/TikTok ready export.</p>
+        <ul class="svc-list">
+          <li>Up to 90 sec final cut</li>
+          <li>Captions + music sync</li>
+          <li>IG / TikTok ready export</li>
+          <li>2 revision rounds</li>
+        </ul>
+      </div>
+
+      <div class="svc-card" style="--accent:var(--red); background:var(--ink);">
+        <span class="svc-icon">🎥</span>
+        <div class="svc-title" style="color:var(--paper)">Event Recap</div>
+        <div class="svc-price">$175</div>
+        <p class="svc-desc" style="color:var(--mid)">On-site coverage + full edit included. Up to 2hrs of candid, flash-style videography delivered as a 1–3 min highlight reel.</p>
+        <ul class="svc-list" style="--border:rgba(255,255,255,.08)">
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Up to 2hr on-site coverage</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">1–3 min highlight reel</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Flash + candid visual style</li>
+          <li style="border-color:rgba(255,255,255,.08);color:rgba(245,240,232,.8)">Delivered in 5 business days</li>
+        </ul>
+      </div>
+
+      <div class="svc-card" style="--accent:var(--red)">
+        <span class="svc-icon">📅</span>
+        <div class="svc-title">Content Retainer</div>
+        <div class="svc-price">$200 / month</div>
+        <p class="svc-desc">4 short-form videos per month — shoot and edit included. Consistent aesthetic, priority turnaround, and a locked creative lane.</p>
+        <ul class="svc-list">
+          <li>4 short-form videos/month</li>
+          <li>Shoot + edit both included</li>
+          <li>Consistent aesthetic lock-in</li>
+          <li>Priority scheduling</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Add-ons -->
+    <div class="addons-row sr sr-delay-2">
+      <div class="addon-item">
+        <span class="addon-name">Rush delivery (24hr)</span>
+        <span class="addon-price">+$30</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extra revision round</span>
+        <span class="addon-price">+$20</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Raw footage delivery</span>
+        <span class="addon-price">+$25</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Promo graphic w/ video package</span>
+        <span class="addon-price">+$35</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extra video (retainer)</span>
+        <span class="addon-price">+$40</span>
+      </div>
+      <div class="addon-item">
+        <span class="addon-name">Extended coverage (+1hr)</span>
+        <span class="addon-price">+$50</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PROCESS ───────────────────────────────────────────────────── -->
+<section class="section-pad" style="background:var(--cream); border-top:1px solid var(--border);">
+  <div class="max-w">
+    <span class="section-kicker">The Process</span>
+    <h2 class="section-title sr">AS SIMPLE<br/>AS THAT.</h2>
+    <p class="section-body sr sr-delay-1" style="margin-bottom:56px;">Five steps. Zero confusion. Just fire photos in your hands fast.</p>
+    <div class="steps-grid sr sr-delay-2">
+      <div class="step">
+        <div class="step-num">01</div>
+        <span class="step-icon">📩</span>
+        <div class="step-title">You DM or Book</div>
+        <p class="step-body">Hit me on Instagram <strong>@blacctography</strong> or fill out the booking form below.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <span class="step-icon">📅</span>
+        <div class="step-title">We Lock a Date</div>
+        <p class="step-body">Confirm the date, time, and location. No long contracts — just a simple confirmation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <span class="step-icon">📱</span>
+        <div class="step-title">I Show Up</div>
+        <p class="step-body">Phone. Flash. No tripods, no setup. I blend in and document the <strong>real energy</strong>.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <span class="step-icon">🎉</span>
+        <div class="step-title">You Live Your Life</div>
+        <p class="step-body">Don't worry about the camera. Just enjoy your event. I handle the documentation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <span class="step-icon">✨</span>
+        <div class="step-title">You Get Your Moments</div>
+        <p class="step-body">Fully edited photos and video clips delivered <strong>same-week</strong>. That's the whole thing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ──────────────────────────────────────────────── -->
+<section class="section-pad" style="background:var(--paper); border-top:1px solid var(--border);">
+  <div class="max-w">
+    <span class="section-kicker">What People Say</span>
+    <h2 class="section-title sr">THE RECEIPTS 📸</h2>
+    <div class="testi-grid sr sr-delay-1" style="margin-top:48px;">
+      <div class="testi-card">
+        <p class="testi-quote">These photos had my event looking like a movie. I posted at midnight and my story views literally doubled. Already rebooking for summer.</p>
+        <div class="testi-meta">
+          <div class="testi-avatar" style="background:var(--red)">JT</div>
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-name">J. Thompson</div>
+            <div class="testi-role">Club Promoter · DC</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">DSLR photographers took 2 weeks to send files. These came back the same night. My event page grew by 400 followers off one post.</p>
+        <div class="testi-meta">
+          <div class="testi-avatar" style="background:var(--amber);color:var(--ink)">MR</div>
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-name">M. Richardson</div>
+            <div class="testi-role">Event Organizer · PG County</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">People who didn't come were texting me asking how to get into the next one. That's FOMO. That's what these photos create. This is my permanent photographer now.</p>
+        <div class="testi-meta">
+          <div class="testi-avatar" style="background:#3a3530">KW</div>
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-name">K. Williams</div>
+            <div class="testi-role">Party Host · Northern Virginia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOKING ───────────────────────────────────────────────────── -->
+<section class="booking-section section-pad" id="book">
+  <div class="max-w">
+    <div class="booking-grid">
+      <div class="sr">
+        <span class="section-kicker">Book Now</span>
+        <p class="booking-manifesto">
+          Your event<br/>
+          <strong>happened.</strong><br/>
+          <em>Prove it.</em>
+        </p>
+        <div class="booking-info">
+          <div class="binfo-row"><span class="binfo-lbl">Event Name</span><span class="binfo-val">Name of the event or shoot. Private party? Tell me who it's for.</span></div>
+          <div class="binfo-row"><span class="binfo-lbl">Host / Socials</span><span class="binfo-val">Your Instagram handle — critical for tagging and portfolio use.</span></div>
+          <div class="binfo-row"><span class="binfo-lbl">Location</span><span class="binfo-val">Venue address for events. Studio / location for content sessions.</span></div>
+          <div class="binfo-row"><span class="binfo-lbl">Capacity</span><span class="binfo-val">Approx. how many people? (Not needed for solo shoots.)</span></div>
+          <div class="binfo-row"><span class="binfo-lbl">Arrival Time</span><span class="binfo-val">VERY important for scheduling. What time do you need me there?</span></div>
+          <div class="binfo-row" style="border:none;"><span class="binfo-lbl">Email</span><span class="binfo-val"><a href="mailto:connectwithblaccmatter@gmail.com" style="color:var(--red);text-decoration:none;">connectwithblaccmatter@gmail.com</a></span></div>
+        </div>
+      </div>
+      <div class="sr sr-delay-2">
+        <div class="bform">
+          <div class="bfield half-grid">
+            <div class="half-inner bfield"><label>Event / Shoot Name</label><input type="text" id="f-event" placeholder="My Event — DC 2025"/></div>
+            <div class="half-inner bfield"><label>Your Instagram Handle</label><input type="text" id="f-ig" placeholder="@yourhandle"/></div>
+          </div>
+          <div class="bfield half-grid">
+            <div class="half-inner bfield"><label>Event Date</label><input type="date" id="f-date"/></div>
+            <div class="half-inner bfield"><label>Arrival Time</label><input type="time" id="f-time"/></div>
+          </div>
+          <div class="bfield"><label>Location / Venue</label><input type="text" id="f-loc" placeholder="DC, PG County, NoVA — venue name or address"/></div>
+          <div class="bfield half-grid">
+            <div class="half-inner bfield">
+              <label>Service Type</label>
+              <select id="f-service">
+                <option value="">Select...</option>
+                <optgroup label="Photography">
+                  <option>Event Coverage ($150–300)</option>
+                  <option>Content Creation Session ($250–600)</option>
+                  <option>First-Timer Deal (15% off — code FIRSTSHOT)</option>
+                  <option>Monthly Photography Subscription ($500–1,500/mo)</option>
+                </optgroup>
+                <optgroup label="Graphic Design">
+                  <option>Flyer / Promo Design ($50)</option>
+                  <option>Social Content Kit ($120/mo)</option>
+                  <option>Brand Starter ($250)</option>
+                </optgroup>
+                <optgroup label="Video">
+                  <option>Reel Edit — edit only ($60)</option>
+                  <option>Event Recap — shoot + edit ($175)</option>
+                  <option>Video Content Retainer ($200/mo)</option>
+                </optgroup>
+                <option>Not sure — let's talk</option>
+              </select>
+            </div>
+            <div class="half-inner bfield">
+              <label>Projected Attendance</label>
+              <select id="f-size">
+                <option value="">Select...</option>
+                <option>Solo / Small (1–10)</option>
+                <option>Under 50</option>
+                <option>50–150</option>
+                <option>150–300</option>
+                <option>300+</option>
+              </select>
+            </div>
+          </div>
+          <div class="bfield"><label>Anything Else I Should Know?</label><textarea id="f-notes" placeholder="Vibe, dress code, specific shots you want — the more detail the better."></textarea></div>
+          <button class="bform-submit" onclick="submitBookingForm()">SEND BOOKING REQUEST →</button>
+        </div>
+        <div class="form-ig-note">
+          Prefer to DM? →
+          <a href="https://instagram.com/blacctography" target="_blank" rel="noopener">@blacctography</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DMV Strip -->
+<div class="dmv-strip sr">
+  <p>Serving the DMV — New Client Deal Active</p>
+  <div class="dmv-tags">
+    <span class="dmv-tag">Washington DC</span>
+    <span class="dmv-tag">PG County</span>
+    <span class="dmv-tag">Northern Virginia</span>
+    <span class="dmv-tag">Silver Spring</span>
+    <span class="dmv-tag">College Park</span>
+    <span class="dmv-tag">Bowie</span>
+    <span class="dmv-tag">Alexandria</span>
+    <span class="dmv-tag">Bethesda</span>
+    <span class="dmv-tag">Rockville</span>
+  </div>
+</div>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div>
+      <a href="index.html" class="foot-brand-name">BLACCT<em>OG</em>RAPHY</a>
+      <p class="foot-tagline">"Your OC Photography Man"</p>
+      <div class="foot-socials">
+        <a href="https://instagram.com/blacctography" target="_blank" rel="noopener" class="foot-social-btn">IG → @blacctography</a>
+        <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener" class="foot-social-btn">Print Shop →</a>
+        <a href="mailto:connectwithblaccmatter@gmail.com" class="foot-social-btn">Email →</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-col-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-col-links">
+        <li><a href="index.html#pricing">Event Coverage</a></li>
+        <li><a href="index.html#pricing">Content Sessions</a></li>
+        <li><a href="index.html#pricing">Graphic Design</a></li>
+        <li><a href="index.html#pricing">Video Editing</a></li>
+        <li><a href="index.html#pricing">First-Timer Deal</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">DMV Areas</div>
+      <ul class="footer-col-links">
+        <li><a href="#">Washington DC</a></li>
+        <li><a href="#">PG County</a></li>
+        <li><a href="#">Northern Virginia</a></li>
+        <li><a href="#">Silver Spring</a></li>
+        <li><a href="#">College Park</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Blacctography · DMV Mobile Photography</p>
+    <div class="footer-legal">
+      <a href="mailto:connectwithblaccmatter@gmail.com">Contact</a>
+      <a href="https://instagram.com/blacctography" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://blacctographyinc.pixieset.com" target="_blank" rel="noopener">Print Shop</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
